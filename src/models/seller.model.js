@@ -26,3 +26,7 @@ const sellerSchema = new mongoose.Schema({
         type: String,
     },
 }, {timestamps:true});
+
+
+
+export default Seller = mongoose.model("Seller", sellerSchema);
