@@ -27,4 +27,24 @@ export const registerSeller = async (req, res, next) => {
     } catch (error) {
         next(error);
     }
-}
+};
+
+export const loginSeller = async(req , res , next)=>{
+    try {
+        const {email, password} = req.body;
+        const seller = await Seller.findOne({email});
+
+        if(!seller || !(await seller.comparePassword(password)))
+            throw new Error("Invalid credentials");
+
+        const token = signToken(seller._id);
+        res.json({seller: {
+            id: seller._id,
+            name: seller.name,
+            email:seller.email,
+            storeName:seller.storeName
+        }, token});
+    } catch (error) {
+        next(error);
+    }
+};
