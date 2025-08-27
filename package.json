@@ -1,0 +1,20 @@
+{
+  "name": "easyreadbackend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rjd06/easy-read.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rjd06/easy-read/issues"
+  },
+  "homepage": "https://github.com/rjd06/easy-read#readme"
+}
