@@ -34,7 +34,11 @@ sellerSchema.pre("save", async function(next){
     const salt = await bcrypt.genSalt(10);
     this.password = bcrypt.hash(this.password, salt);
     next();
-})
+});
+
+sellerSchema.methods.comparePassword = function(candidate){
+    return bcrypt.compare(candidate, this.password);
+}
 
 
 export default Seller = mongoose.model("Seller", sellerSchema);
