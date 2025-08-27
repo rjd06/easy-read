@@ -2,7 +2,7 @@ import { configDotenv } from 'dotenv';
 import express from 'express';
 import cors from "cors";
 import { connectDB } from './src/config/db.js';
-
+import sellerRoutes from "./src/routes/sellerAuth.routes.js"
 
 configDotenv();
 connectDB();
@@ -16,6 +16,7 @@ app.get("/", (req, res)=>{
     res.json({message: "API Ok"});
 });
 
+app.use("/api/auth/seller", sellerRoutes);
  
 const port = process.env.PORT || 3000;
 
