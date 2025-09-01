@@ -41,4 +41,6 @@ sellerSchema.methods.comparePassword = function(candidate){
 }
 
 
-export default Seller = mongoose.model("Seller", sellerSchema);
+ const Seller = mongoose.model("Seller", sellerSchema);
+
+ export default Seller;

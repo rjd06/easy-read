@@ -1,11 +1,12 @@
 import Seller from "../models/seller.model.js";
-import { signToken } from "../utils/token";
+import { signToken } from "../utils/token.js";
 
 export const registerSeller = async (req, res, next) => {
     try {
         const { name, email, password, storeName } = req.body;
-        if (await Seller.findOne({ email }))
-            throw new Error("Email exists");
+        if(await Seller.findOne({email})){
+            return res.status(400).json({message: "Email already exists"});
+        }
 
         const seller = await Seller.create({
             name,
