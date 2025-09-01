@@ -35,8 +35,10 @@ export const loginSeller = async(req , res , next)=>{
         const {email, password} = req.body;
         const seller = await Seller.findOne({email});
 
-        if(!seller || !(await seller.comparePassword(password)))
-            throw new Error("Invalid credentials");
+        if(!seller || !(await seller.comparePassword(password))){
+            return res.status(404).json({message: "Invalid credentials"});
+        }
+            
 
         const token = signToken(seller._id);
         res.json({seller: {
