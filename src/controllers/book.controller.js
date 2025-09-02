@@ -1,7 +1,10 @@
-import jwt from "jsonwebtoken";
-import Seller from "../models/seller.model.js";
+import Book from "../models/book.model.js";
 
-const getToken = (req)=>{
-    const h = req.headers.authorization || "";
-    return h.startsWith("Bearer ") ? h.slice(7) : null;
+export const getAllBooks = async(req , res )=>{
+    try {
+        const books = await Book.find().populate("seller", "name storeName");
+        res.json(books);
+    } catch (error) {
+        res.status(500).json({message:"Server Error"});
+    }
 };
