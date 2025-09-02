@@ -59,4 +59,21 @@ export const updateBook = async(req, res)=>{
     } catch (error) {
         res.status(500).json({message:"Failed to update book"});
     }
-}
+};
+
+// delete book
+export const deleteBook = async(req , res)=>{
+    try {
+        const book = await Book.findById(res.params.id);
+        if(!book) return res.status(404).json({message:"Book not found"});
+
+        if(book.seller.toString() !== req.seller._id.toString()){
+            return res.status(401).json({message:"Not authorized"});
+        };
+
+        await book.deleteOne();
+        res.json({message: "Book deleted"});
+    } catch (error) {
+        res.status(500).json({message: "Failed to delete book"});
+    }
+};
