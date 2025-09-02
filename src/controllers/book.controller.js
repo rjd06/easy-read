@@ -33,4 +33,30 @@ export const createBook = async(req, res)=>{
     } catch (error) {
       res.status(500).res({message: "Failed to create book"})  ;
     }
+};
+
+// update book
+
+export const updateBook = async(req, res)=>{
+    try {
+        const book = await Book.findById(req.params.id);
+        if(!book) return res.status(404).json({message: "Book not found"});
+
+        if(book.seller.toString() !== req.seller._id.toString()){
+            return res.status(401).json({message: "Not authorized"});
+        };
+
+        const {title, author, price, stock, description} = req.body;
+
+        book.title = title || book.title;
+        book.author = author || book.author;
+        book.price = price || book.price ;
+        book.stock = stock || book.stock;
+        book.description = description || book.description;
+
+        const updatedBook = await book.save();
+        res.json(updatedBook);
+    } catch (error) {
+        res.status(500).json({message:"Failed to update book"});
+    }
 }
