@@ -28,3 +28,7 @@ const bookSchema = new mongoose.Schema({
         required: true,
     }
 }, {timestamps: true});
+
+bookSchema.index({title:"text" , author: "text", description:"text"});
+
+export default mongoose.model("Book", bookSchema);
