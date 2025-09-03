@@ -2,7 +2,8 @@ import { configDotenv } from 'dotenv';
 import express from 'express';
 import cors from "cors";
 import { connectDB } from './src/config/db.js';
-import sellerRoutes from "./src/routes/sellerAuth.routes.js"
+import sellerRoutes from "./src/routes/sellerAuth.routes.js";
+import bookRoutes from "./src/routes/book.routes.js";
 
 configDotenv();
 connectDB();
@@ -17,7 +18,8 @@ app.get("/", (req, res)=>{
 });
 
 app.use("/api/auth/seller", sellerRoutes);
- 
+app.use("/api/books", bookRoutes);
+
 const port = process.env.PORT || 3000;
 
 app.listen(port, ()=>{

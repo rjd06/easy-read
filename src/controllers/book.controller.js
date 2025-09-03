@@ -64,7 +64,7 @@ export const updateBook = async(req, res)=>{
 // delete book
 export const deleteBook = async(req , res)=>{
     try {
-        const book = await Book.findById(res.params.id);
+        const book = await Book.findById(req.params.id);
         if(!book) return res.status(404).json({message:"Book not found"});
 
         if(book.seller.toString() !== req.seller._id.toString()){
